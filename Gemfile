@@ -75,6 +75,9 @@ end
 # Disconnects all connections to PostgreSQL db when running rails db:reset
 gem 'pgreset', group: %i[development test]
 
+# Adds comments with model attributes to top of model files and/or routes to top of routes file
+gem 'annotaterb', group: :development
+
 # Preset CSS styles
 gem 'bootstrap', '~> 5.2.3'
 

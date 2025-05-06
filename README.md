@@ -26,6 +26,36 @@
 
 - Seeded database for different test cases
 
+M2 Contributions
+
+* Branches:
+  brie-global_and_navbar_styling_update
+  brie-global_styling_update
+  brie-navbar_update
+  brie-product_bug_fix
+  brie_index_and_show_styling
+
+* Created Controller
+- NavPages 
+
+* Modified Files 
+- _navbar.html.erb
+- products_controller.rb
+- layouts/application.html.erb
+- nav_pages/home.html.erb (Added)
+- nav_pages/about.html.erb (Added)
+- products/index.html.erb
+- products/show.html.erb
+
+* Generalized Changes
+- fixed product bug
+  - User could only buy their own products, not other users' products
+- Created Home and About Pages
+- Styled NavBar
+- Styled Product Index and Show Page
+
+
+
 ## Suchir's Documentation
 
 **Branches:** `account`, `payment`, `routes`, `suchir-purchased-products`
@@ -127,30 +157,69 @@ Custom `routes.rb` structure – Complete
 
 
 ### Ashton's Documentation
-- ashton-listings-management branch
 
-- ProductsController:
+Branches:
+   M2:
+   - ashton-listings-management
+   - ashton-new-prod-hotfix1
+   - ashton-multi-photos
+   - ashton-sort-products
+   M1:
+   - ashton-seed-changes-2
+
+product.rb:
+   M2:
+   - updated photos relation to has_many instead of has_one to allow for multiple photos
+
+ProductsController:
+   M2:
+   - "authorization" method to restrict product manipulation
+   - search and sort helper logic in "index" method
+   - "update" method changed to avoid losing old data when editing products unless intended by seller.
+
+   M1:
    - new and create methods for adding products
    - edit and update methods for modifying products
    - destroy method for removing products
    - helper method for strong product parameters
 
-- views/accounts/show
+views/accounts/show
+   M1:
    - Product management section that lists items for sale
    - can add new, edit, and remove from this section
 
-- views/products/new
+views/products/new
+   M2:
+   - edited fields to allow multiple photos and files to be uploaded
+   M1:
    - full form for uploading new product
-- views/products/edit
+
+views/products/edit
+   M2: 
+   - edited fields to allow multiple photos and files to be uploaded
+   - previously uploaded files and photos can now be viewed and individually deleted
+   M1:
    - full form to modify product, including uploading pictures
-- views/products/index
+
+views/products/index
+   M2:
+   - Added search bar
+   - Added "sort by" drop down
+   M1:
    - Sign in button appears when not signed in
-- views/products/show
+
+views/products/show
+   M2:
+   - additional photos are now displayed in a grid
+   - photos can be clicked for a larger view
+   M1:
    - buttons to edit or delete appear if viewed by seller
 
-- views/shared/_navbar.html
+views/shared/_navbar.html
+   M1:
    - Navbar shows team name
    - clicking logo returns to root
 
-- routes
+routes
+   M1:
    - added routes corresponding with new methods in ProductsController
