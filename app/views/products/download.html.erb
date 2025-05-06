@@ -1,0 +1,25 @@
+<div class="container my-5">
+  <h1>Download: <%= @product.name %></h1>
+  <p class="lead"><%= number_to_currency(@product.price) %></p>
+  <hr>
+
+  <% if @templates.any? %>
+    <p>Click a file below to download:</p>
+    <ul class="list-group">
+      <% @templates.each do |file| %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <%= file.filename.to_s %>
+          <%= link_to "Download",
+                rails_blob_path(file, disposition: "attachment"),
+                class: "btn btn-sm btn-primary" %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <div class="alert alert-warning">
+      No templates available for this product.
+    </div>
+  <% end %>
+
+<%= link_to "← Back to All Products", products_path, class: "btn btn-link mt-4" %>
+</div>

@@ -1,0 +1,17 @@
+<h2>Account Details</h2>
+
+<%= form_with(model: current_user, url: account_path, method: :patch) do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+  </div>
+
+  <div>
+    <%= form.submit "Apply Changes" %>
+  </div>
+<% end %>

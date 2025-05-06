@@ -1,0 +1,96 @@
+<style>
+  html, body {
+    background: linear-gradient(135deg, #ccefff 0%, #4B0082 100%);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+
+  .bg-content {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 0.5rem;
+  }
+
+  .card {
+    border: 1px solid #4B0082;
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-img-top {
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .text-price {
+    color: #007BFF;
+    font-weight: bold;
+  }
+
+  .text-gradient-blue-purple {
+    background: linear-gradient(45deg, #007BFF, #4B0082);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>
+
+<div class="container my-3 bg-content">
+  <% if user_signed_in? %>
+    <div class="d-flex justify-content-end mb-3">
+      <%= button_to "Sign Out",
+                    destroy_user_session_path,
+                    method: :delete,
+                    data: { confirm: "Are you sure you want to sign out?" },
+                    class: "btn btn-outline-secondary" %>
+    </div>
+  <% end %>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="text-gradient-blue-purple">All Designs</h1>
+
+    <form method="get" action="<%= products_path %>" class="d-flex">
+      <input type="text" name="search" placeholder="Search products..." class="form-control me-2" value="<%= params[:search] %>">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+  </div>
+
+  <div class="d-flex justify-content-end mb-3">
+    <form method="get" action="<%= products_path %>">
+      <label for="sort" class="mr-2">Sort by:</label>
+      <select name="sort" id="sort" class="form-select" onchange="this.form.submit()">
+        <option value="">Select...</option>
+        <option value="name_asc" <%= "selected" if params[:sort] == "name_asc" %>>Name (A-Z)</option>
+        <option value="name_desc" <%= "selected" if params[:sort] == "name_desc" %>>Name (Z-A)</option>
+        <option value="price_low" <%= "selected" if params[:sort] == "price_low" %>>Price (Low to High)</option>
+        <option value="price_high" <%= "selected" if params[:sort] == "price_high" %>>Price (High to Low)</option>
+      </select>
+    </form>
+  </div>
+
+  <div class="d-flex flex-wrap justify-content-start">
+    <% @products.each do |product| %>
+      <div class="card m-2" style="width: 16rem; cursor: pointer;"
+           onclick="window.location='<%= product_path(product) %>'">
+        <% if product.photos.present? %>
+          <%= image_tag product.photos.first,
+                        class: "card-img-top",
+                        alt: product.name %>
+        <% else %>
+          <div class="card-img-top bg-light d-flex align-items-center justify-content-center">
+            <span class="text-muted">No Image</span>
+          </div>
+        <% end %>
+        <div class="card-body text-center">
+          <h5 class="card-title"><%= truncate(product.name, length: 25) %></h5>
+          <p class="card-text text-price"><%= number_to_currency(product.price) %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

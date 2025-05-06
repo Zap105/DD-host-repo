@@ -1,0 +1,41 @@
+<div class="container my-5">
+  <h2>Payment Methods</h2>
+
+  <% if @payment_sources.empty? %>
+    <p>No payment methods found.</p>
+  <% else %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Cardholder</th>
+          <th>Card Number</th>
+          <th>Expires</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @payment_sources.each do |ps| %>
+          <tr>
+            <td><%= ps.payment_type %></td>
+            <td><%= ps.cardholder_name %></td>
+            <td><%= ps.card_number %></td>
+            <td><%= "%02d/%d" % [ps.expiration_month, ps.expiration_year] %></td>
+            <td>
+              <%= link_to "Edit", edit_account_payment_path(ps), class: "btn btn-sm btn-outline-info me-2" %>
+              <%= button_to "Delete", account_payment_path(ps),
+                            method: :delete,
+                            data: { confirm: "Are you sure?" },
+                            class: "btn btn-sm btn-outline-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+  <div class="d-flex justify-content-between mt-4">
+    <%= link_to "Add Payment Method", new_account_payment_path, class: "btn btn-primary" %>
+    <%= link_to "← Back to Account", account_path, class: "btn btn-link" %>
+  </div>
+</div>

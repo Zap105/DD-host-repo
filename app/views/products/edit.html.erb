@@ -1,0 +1,71 @@
+<h1>Edit Product</h1>
+
+<%= form_with model: @product, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :price %>
+    <%= f.number_field :price, step: 0.01, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: "form-control", rows: 5 %>
+  </div>
+
+  <!-- Show Existing Photos -->
+  <% if @product.photos.attached? %>
+    <div class="form-group">
+      <h3>Current Photos:</h3>
+      <div class="photo-grid">
+        <% @product.photos.each do |photo| %>
+          <div class="photo-item">
+            <%= image_tag photo, class: "img-thumbnail", width: 100 %>
+            <%= check_box_tag "remove_photos[]", photo.id %> Remove
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Upload Additional Photos -->
+  <div class="form-group">
+    <%= f.label :photos, "Upload Additional Photos" %>
+    <%= f.file_field :photos, multiple: true, class: "form-control" %>
+  </div>
+
+  <!-- Show Existing Files -->
+  <% if @product.templates.attached? %>
+    <div class="form-group">
+      <h3>Current Files:</h3>
+      <ul>
+        <% @product.templates.each do |file| %>
+          <li>
+            <%= link_to file.filename.to_s, url_for(file), target: "_blank" %>
+            <%= check_box_tag "remove_templates[]", file.id %> Remove
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Upload Additional Files -->
+  <div class="form-group">
+    <%= f.label :templates, "Upload Additional Files" %>
+    <%= f.file_field :templates, multiple: true, class: "form-control" %>
+  </div>
+
+  <%= f.submit "Save Changes", class: "btn btn-primary" %>
+
+<% end %>
+
+
+<p>
+  <%= link_to 'Cancel', products_path, class: 'btn btn-secondary' %>
+</p>
+
+<% end %>
+

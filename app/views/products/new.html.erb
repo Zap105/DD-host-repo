@@ -1,0 +1,34 @@
+<h1>New Product Listing</h1>
+
+<%= form_with model: @product, url: products_path do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :price %>
+    <%= f.number_field :price, step: 0.01, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: "form-control", rows: 5 %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :photos, "Product Photo" %>
+    <%= f.file_field :photos, multiple: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :templates, "Product Templates (multiple files)" %>
+    <%= f.file_field :templates, multiple: true, class: "form-control" %>
+  </div>
+
+  <%= f.submit "Create Product", class: "btn btn-primary" %>
+<% end %>
+<p>
+  <%= link_to 'Cancel', products_path, class: 'btn btn-secondary' %>
+</p>

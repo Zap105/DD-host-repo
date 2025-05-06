@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg bg-light">
+
+    <style>
+    /* Navbar gradient background */
+    .navbar {
+      background: linear-gradient(to right, #4B0082, #000000); /* Purple to black */
+    }
+
+    /* Navbar brand and links */
+    .navbar a,
+    .navbar-brand,
+    .nav-link {
+      color: white !important;
+    }
+
+    .navbar a:hover,
+    .nav-link:hover {
+      color: #00aaff !important; /* Bright blue on hover */
+    }
+
+    /* White hamburger icon */
+    .navbar-toggler {
+      border-color: rgba(255, 255, 255, 0.7);
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+  </style>
+  
+  <div class="container-fluid">
+    <a class="navbar-brand" href="<%= root_path%>">3D Dimensional Design</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">Meet the Team ( ͡° ͜ʖ ͡°)</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/products">View Designs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/account">Account Details</a>
+        </li>
+        
+
+        <%# Commented out dropdown example %>
+        <%# <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown link
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li> %>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { turbo: false }, class: "nav-link" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Login/Sign Up", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

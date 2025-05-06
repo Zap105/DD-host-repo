@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>3DD Website</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <style>
+      body {
+        background-color: #ffffff;
+        color: #000000;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+      footer {
+        background-color: #4B0082;
+        color: white;
+        padding: 1rem 0;
+        text-align: center;
+        margin-top: 2rem;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <%= render 'shared/navbar' %>
+
+    <%= render 'shared/flash' %>
+    <% flash.discard %>
+
+
+    <main role="main" class="container">
+      <%= yield %>
+    </main>
+
+    <footer>
+      &copy; <%= Time.current.year %> 3D Dimensional Design. Built with love by three aspiring Computer Scientists attending University Memphis (<3)
+    </footer>
+  </body>
+</html>

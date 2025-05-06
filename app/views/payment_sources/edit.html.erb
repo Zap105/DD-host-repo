@@ -1,0 +1,50 @@
+<div class="container my-5">
+  <h1>Edit Payment Method</h1>
+
+  <%= form_with model: @payment_source, url: account_payment_path(@payment_source), method: :patch, local: true do |f| %>
+    <% if @payment_source.errors.any? %>
+      <div class="alert alert-danger">
+        <h4>Update failed:</h4>
+        <ul>
+          <% @payment_source.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= f.label :payment_type %>
+      <%= f.text_field :payment_type, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :cardholder_name %>
+      <%= f.text_field :cardholder_name, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :card_number %>
+      <%= f.text_field :card_number, class: "form-control" %>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <%= f.label :expiration_month %>
+        <%= f.number_field :expiration_month, in: 1..12, class: "form-control" %>
+      </div>
+      <div class="col-md-6 mb-3">
+        <%= f.label :expiration_year %>
+        <%= f.number_field :expiration_year, in: 2024..2035, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :cvv %>
+      <%= f.password_field :cvv, class: "form-control" %>
+    </div>
+
+    <%= f.submit "Update Payment Method", class: "btn btn-success" %>
+    <%= link_to "Cancel", account_payments_path, class: "btn btn-link" %>
+  <% end %>
+</div>
